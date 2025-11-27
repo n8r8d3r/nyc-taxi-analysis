@@ -37,8 +37,34 @@ nyc-taxi-analysis/
 - Passenger count must be between 1-6
 - Removed records with invalid combinations
 
+### Inter-Borough Travel Flow Analysis
+Analysis of taxi movement patterns between NYC boroughs revealed strong Manhattan-centric behavior:
+
+- **Manhattan dominance:** 84.8% of all trips either start or end in Manhattan
+- **Asymmetric flows:** Brooklyn → Manhattan has 7x more trips than Manhattan → Brooklyn
+- **Tourism effect:** Traffic from outer boroughs flows heavily into Manhattan, but return trips are minimal
+- **Market dynamics:** Similar to airline hub-and-spoke patterns, suggesting taxi supply concentrates where demand originates
+
+**Key insight:** Understanding these flow patterns is critical for demand forecasting and fleet optimization.
+
+### Tipping Behavior Analysis
+Examined tipping patterns across 2.9M credit card transactions to understand factors influencing gratuity:
+
+#### Peer Pressure Effect
+- **Solo riders:** 5.07% leave zero tip
+- **Groups:** 4.39% leave zero tip (15% less likely to stiff)
+- **Generous tipping (20%+):** Groups more likely to tip in higher brackets
+
+**Finding:** Modest but measurable peer pressure effect - groups keep each other accountable.
+
+#### Time-of-Day Patterns
+- **Evening (6pm-12am):** Highest average tips at 27.07%, lowest stiff rate at 3.65%
+- **Late night (12am-6am):** Average tips decline to 21-24%, stiff rate jumps to 8.31%
+- **Midnight peak:** 24.75% average tip suggests early-evening departures tip best
+
+**Key insight:** Sober evening customers (theater/dinner crowd) are the most generous tippers. Alcohol doesn't improve tipping - it increases variability and doubles the zero-tip rate.
 ## Technologies Used
-- **Python 3.14**
+- **Python 3.11**
 - **pandas** - Data manipulation and analysis
 - **pyarrow** - Parquet file support
 - **numpy** - Numerical operations
@@ -78,6 +104,15 @@ python src/explore_data.py
 
 # Clean and filter data
 python src/clean_data.py
+
+# Analyze inter-borough travel patterns
+python src/borough_flows.py
+
+# Analyze tipping behavior (peer pressure)
+python src/tip_peer_pressure.py
+
+# Analyze time-of-day tipping patterns
+python src/late_night_tips.py
 ```
 
 ## Future Enhancements
